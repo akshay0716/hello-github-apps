@@ -1,0 +1,8 @@
+version = 1
+
+[[analyzers]]
+name = "go"
+
+  [analyzers.meta]
+  import_root = "github.com/akshay0716/hello-github-apps"
+  dependencies_vendored = true
