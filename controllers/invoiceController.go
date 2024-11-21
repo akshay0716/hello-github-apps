@@ -16,6 +16,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// InvoiceViewFormat represents the format structure for viewing invoices.
+type InvoiceViewFormat struct {
+    // Add fields here
+}
 type InvoiceViewFormat struct {
 	Invoice_id       string
 	Payment_method   string
@@ -25,6 +29,10 @@ type InvoiceViewFormat struct {
 	Table_number     interface{}
 	Payment_due_date time.Time
 	Order_details    interface{}
+// GetInvoices retrieves a list of invoices.
+func GetInvoices() gin.HandlerFunc {
+    // function implementation
+}
 }
 
 var invoiceCollection *mongo.Collection = database.OpenCollection(database.Client, "invoice")
@@ -39,6 +47,11 @@ func GetInvoices() gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occured while listing invoice items"})
 		}
 
+// GetInvoice handles the retrieval of an invoice using a specific handler function.
+// It returns a gin.HandlerFunc that processes the request accordingly.
+func GetInvoice() gin.HandlerFunc {
+    // function implementation
+}
 		var allInvoices []bson.M
 		if err = result.All(ctx, &allInvoices); err != nil {
 			log.Fatal(err)
@@ -68,6 +81,10 @@ func GetInvoice() gin.HandlerFunc {
 
 		invoiceView.Payment_method = "null"
 		if invoice.Payment_method != nil {
+// CreateInvoice handles the creation of an invoice.
+func CreateInvoice() gin.HandlerFunc {
+    // function implementation
+}
 			invoiceView.Payment_method = *invoice.Payment_method
 		}
 
@@ -112,6 +129,11 @@ func CreateInvoice() gin.HandlerFunc {
 		invoice.Invoice_id = invoice.ID.Hex()
 
 		validationErr := validate.Struct(invoice)
+// UpdateInvoice handles the update of an existing invoice.
+func UpdateInvoice() gin.HandlerFunc {
+    // Function implementation goes here
+}
+
 		if validationErr != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": validationErr.Error()})
 			return

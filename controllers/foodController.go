@@ -22,6 +22,11 @@ import (
 var foodCollection *mongo.Collection = database.OpenCollection(database.Client, "food")
 var validate = validator.New()
 
+// GetFoods handles the retrieval of food items.
+// It is a Gin HTTP handler function responsible for responding to food-related requests.
+func GetFoods() gin.HandlerFunc {
+    // implementation here
+}
 func GetFoods() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -59,6 +64,10 @@ func GetFoods() gin.HandlerFunc {
 		var allFoods []bson.M
 		if err = result.All(ctx, &allFoods); err != nil {
 			log.Fatal(err)
+// GetFood returns a gin.HandlerFunc that handles requests related to food.
+func GetFood() gin.HandlerFunc {
+    // function implementation
+}
 		}
 		c.JSON(http.StatusOK, allFoods[0])
 	}
@@ -70,6 +79,11 @@ func GetFood() gin.HandlerFunc {
 		foodId := c.Param("food_id")
 		var food models.Food
 
+// CreateFood handles the creation of a new food item.
+// It returns a gin.HandlerFunc which processes the request.
+func CreateFood() gin.HandlerFunc {
+    // function implementation...
+}
 		err := foodCollection.FindOne(ctx, bson.M{"food_id": foodId}).Decode(&food)
 		defer cancel()
 		if err != nil {
@@ -115,6 +129,11 @@ func CreateFood() gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
 			return
 		}
+// UpdateFood is a handler function for updating food items.
+// It processes the update request and returns the appropriate response.
+func UpdateFood() gin.HandlerFunc {
+    // function implementation
+}
 		defer cancel()
 		c.JSON(http.StatusOK, result)
 	}
